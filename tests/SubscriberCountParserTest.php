@@ -1,12 +1,12 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Subscriber\Subscriber;
+use Subscriber\Count;
 
-class ParserTest extends TestCase
+class SubscriberCountParserTest extends TestCase
 {
     /**
-     * @covers \Subscriber\Subscriber::parse
+     * @covers \Subscriber\Count::parse
      * @test
      */
     public function subscriber_counts_can_parse_millions()
@@ -28,7 +28,7 @@ class ParserTest extends TestCase
         foreach ($subscribers as $string => $int) {
 
             // Parse
-            $result = Subscriber::parse($string);
+            $result = Count::parse($string);
 
             // Assert
             $this->assertTrue(is_int($result));
@@ -38,7 +38,7 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @covers \Subscriber\Subscriber::parse
+     * @covers \Subscriber\Count::parse
      * @test
      */
     public function subscriber_counts_can_parse_thousands()
@@ -85,7 +85,7 @@ class ParserTest extends TestCase
         foreach ($subscribers as $string => $int) {
 
             // Parse
-            $result = Subscriber::parse($string);
+            $result = Count::parse($string);
 
             // Assert
             $this->assertTrue(is_int($result));
@@ -95,7 +95,7 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @covers \Subscriber\Subscriber::parse
+     * @covers \Subscriber\Count::parse
      * @test
      */
     public function subscriber_counts_can_parse_below_a_thousand()
@@ -117,7 +117,7 @@ class ParserTest extends TestCase
         foreach ($subscribers as $string => $int) {
 
             // Parse
-            $result = Subscriber::parse($string);
+            $result = Count::parse($string);
 
             // Assert
             $this->assertTrue(is_int($result));

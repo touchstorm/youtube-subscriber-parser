@@ -2,7 +2,7 @@
 
 namespace Subscriber;
 
-class Subscriber
+class Count
 {
     /**
      * Parse subscriber counts from string
