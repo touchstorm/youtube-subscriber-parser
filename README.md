@@ -36,8 +36,29 @@ GET /v3/channels?part=statistics&forUsername=howdiniguru&key=...&fields=items(st
 }
 ```
 
-## Usage
+## Installation & Usage
 
 ```
-composer install 
+composer require touchstorm/youtube-subscriber-parser
+```
+
+```php
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Subscriber\Count;
+
+$tens_abbr_count = '41';
+$hundreds_abbr_count = '311';
+$thousands_decimal_abbr_count = '1.5K';
+$thousands_abbr_count = '883K';
+$millions_abbr_count = '99M';
+$hundred_millions_abbr_count = '943M';
+
+echo Count::parse($tens_abbr_count); // 41
+echo Count::parse($hundreds_abbr_count); // 311
+echo Count::parse($thousands_decimal_abbr_count); // 1500
+echo Count::parse($thousands_abbr_count); // 883000
+echo Count::parse($millions_abbr_count); // 99000000
+echo Count::parse($hundred_millions_abbr_count); // 943000000
+
 ```
