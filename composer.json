@@ -1,0 +1,21 @@
+{
+  "name": "touchstorm/youtube-subscriber-parser",
+  "description": "Parse YouTube subscriber counts into usable integers",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michael Waltman",
+      "email": "seomike@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Subscriber\\": "src"
+    }
+  },
+  "require": {}
+}
