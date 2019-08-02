@@ -31,8 +31,7 @@ class SubscriberCountParserTest extends TestCase
             $result = Count::parse($string);
 
             // Assert
-            $this->assertTrue(is_int($result));
-            $this->assertTrue($result == $int);
+            $this->assertTrue($result === $int);
             $this->assertIsInt($result);
         }
     }
@@ -88,8 +87,7 @@ class SubscriberCountParserTest extends TestCase
             $result = Count::parse($string);
 
             // Assert
-            $this->assertTrue(is_int($result));
-            $this->assertTrue($result == $int);
+            $this->assertTrue($result === $int);
             $this->assertIsInt($result);
         }
     }
@@ -120,9 +118,45 @@ class SubscriberCountParserTest extends TestCase
             $result = Count::parse($string);
 
             // Assert
-            $this->assertTrue(is_int($result));
-            $this->assertTrue($result == $int);
+            $this->assertTrue($result === $int);
+            $this->assertTrue($result == $string);
             $this->assertIsInt($result);
         }
     }
+
+    /**
+     * @covers \Subscriber\Count::parse
+     * @test
+     */
+    public function subscriber_counts_can_convert_old_string_format()
+    {
+
+        $subscribers = [
+            '2' => 2,
+            '198' => 198,
+            '1907' => 1907,
+            '88727' => 88727,
+            '817001' => 817001,
+            '8772270' => 8772270,
+            '39507529' => 39507529,
+            '592832556' => 592832556,
+            '7025513210' => 7025513210,
+            '81419130487' => 81419130487,
+            '879086674765' => 879086674765,
+            '1484272114567' => 1484272114567,
+            '71787101409726' => 71787101409726
+        ];
+
+        foreach ($subscribers as $string => $int) {
+
+            // Parse
+            $result = Count::parse($string);
+
+            // Assert
+            $this->assertTrue($result === $int);
+            $this->assertTrue($result == $string);
+            $this->assertIsInt($result);
+        }
+    }
+
 }
