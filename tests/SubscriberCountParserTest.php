@@ -9,6 +9,60 @@ class SubscriberCountParserTest extends TestCase
      * @covers \Subscriber\Count::parse
      * @test
      */
+    public function subscriber_counts_can_parse_billions()
+    {
+        $subscribers = [
+            '9B' => 9000000000,
+            '19B' => 19000000000,
+            '29B' => 29000000000,
+            '39B' => 39000000000,
+            '49B' => 49000000000,
+            '59B' => 59000000000,
+            '69B' => 69000000000,
+            '79B' => 79000000000,
+            '89B' => 89000000000,
+            '99B' => 99000000000,
+            '999B' => 999000000000,
+        ];
+
+        foreach ($subscribers as $string => $int) {
+
+            // Parse
+            $result = Count::parse($string);
+
+            // Assert
+            $this->assertTrue($result === $int);
+            $this->assertIsInt($result);
+        }
+    }
+
+    /**
+     * @covers \Subscriber\Count::parse
+     * @test
+     */
+    public function subscriber_counts_can_parse_billions_with_lowercase()
+    {
+        $subscribers = [
+            '9b' => 9000000000,
+            '19b' => 19000000000,
+            '999b' => 999000000000,
+        ];
+
+        foreach ($subscribers as $string => $int) {
+
+            // Parse
+            $result = Count::parse($string);
+
+            // Assert
+            $this->assertTrue($result === $int);
+            $this->assertIsInt($result);
+        }
+    }
+
+    /**
+     * @covers \Subscriber\Count::parse
+     * @test
+     */
     public function subscriber_counts_can_parse_millions()
     {
         $subscribers = [
@@ -40,9 +94,35 @@ class SubscriberCountParserTest extends TestCase
      * @covers \Subscriber\Count::parse
      * @test
      */
+    public function subscriber_counts_can_parse_millions_with_lowercase()
+    {
+        $subscribers = [
+            '9m' => 9000000,
+            '19m' => 19000000,
+            '59m' => 59000000,
+            '999m' => 999000000,
+        ];
+
+        foreach ($subscribers as $string => $int) {
+
+            // Parse
+            $result = Count::parse($string);
+
+            // Assert
+            $this->assertTrue($result === $int);
+            $this->assertIsInt($result);
+        }
+    }
+
+    /**
+     * @covers \Subscriber\Count::parse
+     * @test
+     */
     public function subscriber_counts_can_parse_thousands()
     {
         $subscribers = [
+            '1K' => 1000,
+            '2K' => 2000,
             '1.9K' => 1900,
             '2.9K' => 2900,
             '3.9K' => 3900,
@@ -96,6 +176,31 @@ class SubscriberCountParserTest extends TestCase
      * @covers \Subscriber\Count::parse
      * @test
      */
+    public function subscriber_counts_can_parse_thousands_with_lowercase()
+    {
+        $subscribers = [
+            '1k' => 1000,
+            '1.9k' => 1900,
+            '9.9k' => 9900,
+            '19k' => 19000,
+            '109k' => 109000
+        ];
+
+        foreach ($subscribers as $string => $int) {
+
+            // Parse
+            $result = Count::parse($string);
+
+            // Assert
+            $this->assertTrue($result === $int);
+            $this->assertIsInt($result);
+        }
+    }
+
+    /**
+     * @covers \Subscriber\Count::parse
+     * @test
+     */
     public function subscriber_counts_can_parse_below_a_thousand()
     {
         $subscribers = [
@@ -130,9 +235,10 @@ class SubscriberCountParserTest extends TestCase
      */
     public function subscriber_counts_can_convert_old_string_format()
     {
-
+        // Set up
         $subscribers = [
             '2' => 2,
+            '15' => 15,
             '198' => 198,
             '1907' => 1907,
             '88727' => 88727,
@@ -149,7 +255,7 @@ class SubscriberCountParserTest extends TestCase
 
         foreach ($subscribers as $string => $int) {
 
-            // Parse
+            // Action
             $result = Count::parse($string);
 
             // Assert
